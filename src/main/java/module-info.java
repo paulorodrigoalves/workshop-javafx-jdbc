@@ -8,6 +8,8 @@ module com.example.workshojavafxjdbc {
 
     opens com.example.workshojavafxjdbc to javafx.fxml;
     exports com.example.workshojavafxjdbc;
+    exports com.example.workshojavafxjdbc.entities;
+    opens com.example.workshojavafxjdbc.entities to javafx.fxml;
 
 
 }
