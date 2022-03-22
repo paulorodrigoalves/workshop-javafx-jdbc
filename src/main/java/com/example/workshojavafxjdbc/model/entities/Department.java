@@ -1,19 +1,17 @@
-package com.example.workshojavafxjdbc.entities;
+package com.example.workshojavafxjdbc.model.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 public class Department implements Serializable {
 
-    private static final long serialVersionUID = 1l;
-
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private String name;
 
-    public Department() {
-    }
+    public Department(){}
 
-    public Department(Integer id, String name) {
+    public Department (Integer id, String name){
         this.id = id;
         this.name = name;
     }
@@ -39,12 +37,12 @@ public class Department implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Department)) return false;
         Department that = (Department) o;
-        return getId().equals(that.getId()) && getName().equals(that.getName());
+        return getId().equals(that.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName());
+        return Objects.hash(getId());
     }
 
     @Override

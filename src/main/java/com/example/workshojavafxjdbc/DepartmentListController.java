@@ -1,6 +1,7 @@
 package com.example.workshojavafxjdbc;
 
-import com.example.workshojavafxjdbc.entities.Department;
+import com.example.workshojavafxjdbc.model.entities.Department;
+import com.example.workshojavafxjdbc.model.entities.Department;
 import com.example.workshojavafxjdbc.services.DepartmentService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
