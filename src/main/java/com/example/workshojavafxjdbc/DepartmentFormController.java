@@ -15,12 +15,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class DepartmentFormController implements Initializable {
 
     private Department entity;
+
     private DepartmentService service;
+
+    private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
+
+
 
     @FXML
     private TextField txtId;
@@ -48,9 +55,16 @@ public class DepartmentFormController implements Initializable {
         try {
             entity = getFormData();
             service.saveOrUpdate(entity);
+            notifyDataChangeListeners();
             Utils.currentStage(event).close();
         }catch (DbException e){
             Alerts.showAlert("Error saving object", null, e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    private void notifyDataChangeListeners() {
+        for( DataChangeListener listener: dataChangeListeners){
+            listener.onDataChanged();
         }
     }
 
@@ -80,6 +94,9 @@ public class DepartmentFormController implements Initializable {
         this.service = service;
     }
 
+    public void subscribeDataChangeListener(DataChangeListener listener){
+        dataChangeListeners.add(listener);
+    }
     private void initializeNodes(){
         Constraints.setTextFieldInteger(txtId);
         Constraints.setTextFieldMaxLength(txtName,30);
