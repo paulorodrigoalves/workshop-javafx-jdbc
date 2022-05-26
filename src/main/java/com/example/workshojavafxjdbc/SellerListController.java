@@ -2,6 +2,7 @@ package com.example.workshojavafxjdbc;
 
 import com.example.workshojavafxjdbc.db.DbIntegrityException;
 import com.example.workshojavafxjdbc.model.entities.Seller;
+import com.example.workshojavafxjdbc.services.DepartmentService;
 import com.example.workshojavafxjdbc.services.SellerService;
 import com.example.workshojavafxjdbc.services.SellerService;
 import com.example.workshojavafxjdbc.util.Alerts;
@@ -108,10 +109,9 @@ public class SellerListController implements Initializable, DataChangeListener {
 
             SellerFormController controller = loader.getController();
             controller.setSeller(obj);
-            controller.setSellerService(new SellerService());
-
+            controller.setServices(new SellerService(), new DepartmentService());
+            controller.loadAssociatedObjects();
             controller.subscribeDataChangeListener(this);
-
             controller.updateFormData();
 
             Stage dialogStage = new Stage();
@@ -123,6 +123,7 @@ public class SellerListController implements Initializable, DataChangeListener {
             dialogStage.showAndWait();
 
         }catch (IOException e){
+            e.printStackTrace();
             Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
